@@ -42,6 +42,12 @@
         </view>
       </view>
 
+      <!-- 右侧：设置按钮 -->
+      <view class="top-actions">
+        <view class="action-btn" @click="openAudioSettings">
+          <text class="action-icon">🔊</text>
+        </view>
+      </view>
 
     </view>
 
@@ -319,6 +325,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { useAudio } from '@/composables/useAudio'
+import { SoundType } from '@/utils/audioTypes'
 
 // 泡泡数据类型定义
 interface Bubble {
@@ -418,6 +426,7 @@ const usedBubbles = ref<Set<string>>(new Set(DEFAULT_BUBBLES.map(b => b.id))) //
 const userExp = ref(0)
 const collectedStickers = ref<string[]>([])
 const isCompleted = ref(false)
+const previousLevel = ref(1) // 用于检测等级提升
 const windowSize = ref({ width: 375, height: 667 })
 
 // 模态弹窗状态
@@ -584,15 +593,23 @@ const handleBubbleClick = (bubble: any) => {
 
 // 处理泡泡完成
 const handleBubbleComplete = (bubble: Bubble) => {
+  // 播放泡泡破裂音效
+  if (bubble.bubbleType === 'golden') {
+    playSound(SoundType.ACHIEVEMENT, 0.9) // 金色泡泡播放成就音效
+  } else {
+    playSound(SoundType.BUBBLE_POP, 0.8) // 普通泡泡播放破裂音效
+  }
+  
   // 移除泡泡
   currentBubbles.value = currentBubbles.value.filter(b => b.id !== bubble.id)
   
   // 增加经验值
-  userExp.value += bubble.expReward
+  addExperience(bubble.expReward)
   
   // 如果是金色泡泡，添加贴纸
   if (bubble.bubbleType === 'golden' && bubble.stickerReward) {
     collectedStickers.value.push(bubble.stickerReward)
+    playSound(SoundType.REWARD, 1.0) // 获得贴纸时播放奖励音效
   }
   
   // 显示完成提示
@@ -638,6 +655,23 @@ const closeModal = () => {
   resetTimer()
 }
 
+// 打开音频设置页面
+const openAudioSettings = () => {
+  playSound(SoundType.UI_CLICK, 0.5) // 播放点击音效
+  
+  // #ifdef MP-WEIXIN || MP-ALIPAY || MP-BAIDU
+  uni.navigateTo({
+    url: '/pages/audio-settings/index'
+  })
+  // #endif
+  
+  // #ifdef H5 || APP-PLUS
+  uni.navigateTo({
+    url: '/pages/audio-settings/index'
+  })
+  // #endif
+}
+
 // 打开自定义泡泡模态框
 const openCustomModal = () => {
   openModal('create')
@@ -675,6 +709,31 @@ const getLevel = () => {
   if (exp >= 50) return Math.floor(exp / 50) + 3
   if (exp >= 10) return Math.floor(exp / 10) + 1
   return 1
+}
+
+// 检测等级提升
+const checkLevelUp = () => {
+  const currentLevel = getLevel()
+  if (currentLevel > previousLevel.value) {
+    // 播放等级提升音效
+    playSound(SoundType.LEVEL_UP, 1.0)
+    
+    // 显示等级提升提示
+    uni.showToast({
+      title: `🎉 恭喜升级！\n等级提升至 Lv.${currentLevel}`,
+      icon: 'none',
+      duration: 3000
+    })
+    
+    // 更新前一个等级
+    previousLevel.value = currentLevel
+  }
+}
+
+// 增加经验值并检测等级提升
+const addExperience = (exp: number) => {
+  userExp.value += exp
+  checkLevelUp()
 }
 
 // 获取进度旋转角度（用于3D进度圆环）
@@ -867,10 +926,13 @@ const submitWrite = () => {
   
   // 移除泡泡
   if (currentModalBubble.value) {
+    // 播放写一局完成音效
+    playSound(SoundType.REWARD, 0.8)
+    
     currentBubbles.value = currentBubbles.value.filter(b => b.id !== currentModalBubble.value!.id)
     
     // 增加经验值
-    userExp.value += currentModalBubble.value.expReward
+    addExperience(currentModalBubble.value.expReward)
     
     // 显示成功提示
     uni.showToast({
@@ -891,11 +953,14 @@ const submitWrite = () => {
 // 完成行动任务
 const completeAction = () => {
   if (currentModalBubble.value) {
+    // 播放行动完成音效
+    playSound(SoundType.REWARD, 0.8)
+    
     // 移除泡泡
     currentBubbles.value = currentBubbles.value.filter(b => b.id !== currentModalBubble.value!.id)
     
     // 增加经验值
-    userExp.value += currentModalBubble.value.expReward
+    addExperience(currentModalBubble.value.expReward)
     
     // 显示行动提示
     uni.showToast({
@@ -1024,6 +1089,9 @@ const completeTimer = () => {
     timerInterval.value = null
   }
   
+  // 播放倒计时完成音效
+  playSound(SoundType.COUNTDOWN_COMPLETE, 0.9)
+  
   // 播放完成反馈
   // #ifdef APP-PLUS
   uni.vibrateLong()
@@ -1035,7 +1103,7 @@ const completeTimer = () => {
     currentBubbles.value = currentBubbles.value.filter(b => b.id !== currentModalBubble.value!.id)
     
     // 增加经验值
-    userExp.value += currentModalBubble.value.expReward
+    addExperience(currentModalBubble.value.expReward)
     
     // 显示完成提示
     uni.showToast({
@@ -1066,8 +1134,11 @@ const resetTimer = () => {
   }
 }
 
+// 初始化音频系统
+const { playSound, settings } = useAudio()
+
 // 生命周期
-onMounted(() => {
+onMounted(async () => {
   updateWindowSize()
   
   // 监听窗口大小变化
@@ -1291,11 +1362,14 @@ onUnmounted(() => {
   50% { transform: translateY(-18rpx) rotate(20deg); opacity: 1; }
 }
 
-/* 顶部布局样式 - 由于进度面板已绝对定位，此容器可简化 */
+/* 顶部布局样式 */
 .top-layout {
   position: relative;
   z-index: 10;
   padding: 20rpx 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   animation: topLayoutEntry 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
 }
 
@@ -1310,7 +1384,7 @@ onUnmounted(() => {
   }
 }
 
-/* 左侧进度面板 - 悬浮在右上角 */
+/* 左侧进度面板 */
 .progress-compact {
   @include modern-glass;
   border-radius: 24rpx;
@@ -1318,10 +1392,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 20rpx;
-  position: absolute;
-  top: 32rpx; /* 与hero-content顶部对齐 */
-  right: 32rpx; /* 与hero-content右侧对齐 */
-  z-index: 20; /* 高于hero-content */
+  flex: 1;
   animation: floatPanel 4s ease-in-out infinite, rightPanelEntry 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
   box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
   transform-origin: right top;
@@ -1344,6 +1415,41 @@ onUnmounted(() => {
 .progress-compact:hover {
   transform: translateY(-8rpx) scale(1.02);
   box-shadow: 0 12rpx 32rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 顶部操作区域 */
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-left: 20rpx;
+}
+
+.action-btn {
+  width: 72rpx;
+  height: 72rpx;
+  @include modern-glass;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 6rpx 16rpx rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  transform: translateY(-4rpx) scale(1.05);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+}
+
+.action-btn:active {
+  transform: translateY(-2rpx) scale(0.98);
+}
+
+.action-icon {
+  font-size: 32rpx;
+  line-height: 1;
 }
 
 @keyframes leftPanelEntry {
