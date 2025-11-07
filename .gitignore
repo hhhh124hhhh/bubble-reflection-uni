@@ -169,12 +169,11 @@ cloudbaserc.json
 rules/
 
 # Local HTML files (remove if not needed)
-戳泡泡反思.html
 
 # Markdown files in root (keep project documentation)
-README.md
-CONTRIBUTING.md
-CHANGELOG.md
-LICENSE
-SECURITY.md
-CODE_OF_CONDUCT.md
+# README.md - keep this file visible on GitHub
+# CONTRIBUTING.md
+# CHANGELOG.md
+# LICENSE
+# SECURITY.md
+# CODE_OF_CONDUCT.md
