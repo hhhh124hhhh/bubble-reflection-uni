@@ -1,0 +1,606 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+
+/* 颜色变量 */
+
+/* 行为相关颜色 */
+$uni-color-primary: #007aff;
+$uni-color-success: #4cd964;
+$uni-color-warning: #f0ad4e;
+$uni-color-error: #dd524d;
+
+/* 文字基本颜色 */
+$uni-text-color: #333; // 基本色
+$uni-text-color-inverse: #fff; // 反色
+$uni-text-color-grey: #999; // 辅助灰色，如加载更多的提示信息
+$uni-text-color-placeholder: #808080;
+$uni-text-color-disable: #c0c0c0;
+
+/* 背景颜色 */
+$uni-bg-color: #fff;
+$uni-bg-color-grey: #f8f8f8;
+$uni-bg-color-hover: #f1f1f1; // 点击状态颜色
+$uni-bg-color-mask: rgba(0, 0, 0, 0.4); // 遮罩颜色
+
+/* 边框颜色 */
+$uni-border-color: #c8c7cc;
+
+/* 尺寸变量 */
+
+/* 文字尺寸 */
+$uni-font-size-sm: 12px;
+$uni-font-size-base: 14px;
+$uni-font-size-lg: 16;
+
+/* 图片尺寸 */
+$uni-img-size-sm: 20px;
+$uni-img-size-base: 26px;
+$uni-img-size-lg: 40px;
+
+/* Border Radius */
+$uni-border-radius-sm: 2px;
+$uni-border-radius-base: 3px;
+$uni-border-radius-lg: 6px;
+$uni-border-radius-circle: 50%;
+
+/* 水平间距 */
+$uni-spacing-row-sm: 5px;
+$uni-spacing-row-base: 10px;
+$uni-spacing-row-lg: 15px;
+
+/* 垂直间距 */
+$uni-spacing-col-sm: 4px;
+$uni-spacing-col-base: 8px;
+$uni-spacing-col-lg: 12px;
+
+/* 透明度 */
+$uni-opacity-disabled: 0.3; // 组件禁用态的透明度
+
+/* 文章场景相关 */
+$uni-color-title: #2c405a; // 文章标题颜色
+$uni-font-size-title: 20px;
+$uni-color-subtitle: #555; // 二级标题颜色
+$uni-font-size-subtitle: 18px;
+$uni-color-paragraph: #3f536e; // 文章段落颜色
+$uni-font-size-paragraph: 15px;
+
+/* 🌈 戳泡泡反思应用 - 2024年治愈系色彩系统 */
+
+/* ========== 主渐变色彩系统 - 柔和治愈系 ========== */
+// 主要渐变 - 宁静淡蓝紫系（降低饱和度）
+$primary-gradient: linear-gradient(135deg, #e8f4f8 0%, #f0e6f6 50%, #fef6f0 100%);
+$primary-gradient-soft: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+$primary-gradient-warm: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+
+// 次要渐变 - 自然柔和色彩系
+$calm-blue-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+$gentle-pink-gradient: linear-gradient(135deg, #fdf2f8 0%, #fef3f2 100%);
+$mint-green-gradient: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+$warm-orange-gradient: linear-gradient(135deg, #fff7ed 0%, #fef3e7 100%);
+$soft-purple-gradient: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
+$teal-gradient: linear-gradient(135deg, #f0fdfa 0%, #e6fffa 100%);
+
+/* ========== 情绪渐变色彩系统 - 柔和治愈系 ========== */
+// 情绪颜色 - 使用超柔和治愈系渐变（2024年流行色）
+$emotion-peaceful: linear-gradient(135deg, #e8f5e8 0%, #d1fae5 100%);
+$emotion-happy: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+$emotion-sad: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+$emotion-anxious: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+$emotion-excited: linear-gradient(135deg, #ffe4e6 0%, #fecaca 100%);
+$emotion-grateful: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+$emotion-angry: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+
+/* ========== 关键词渐变色彩系统 - 柔和专业系 ========== */
+// 关键词颜色 - 柔和专业渐变
+$keyword-work: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+$keyword-family: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+$keyword-health: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+$keyword-future: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+$keyword-love: linear-gradient(135deg, #ffe4e6 0%, #fecaca 100%);
+$keyword-goal: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+
+/* ========== 特殊渐变色彩 - 柔和系 ========== */
+// 金色泡泡 - 温和金色渐变
+$golden-gradient: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%);
+$golden-gradient-soft: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+
+// 写一句泡泡 - 柔和创意渐变
+$write-gradient: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+$write-gradient-soft: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+
+// 行动泡泡 - 温和活力渐变
+$action-gradient: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+$action-gradient-soft: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+
+/* ========== 玻璃拟态系统 - 柔和治愈系 ========== */
+// 玻璃效果参数 - 更柔和透明度
+$glass-bg: rgba(255, 255, 255, 0.95);
+$glass-bg-dark: rgba(255, 255, 255, 0.85);
+$glass-blur: 20px;
+$glass-blur-strong: 40px;
+$glass-border: rgba(255, 255, 255, 0.8);
+$glass-border-dark: rgba(255, 255, 255, 0.6);
+$glass-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.08);
+$glass-shadow-strong: 0 24rpx 80rpx rgba(0, 0, 0, 0.12);
+
+/* ========== 尺寸系统 ========== */
+// 泡泡尺寸
+$bubble-size-xs: 96rpx;   // 超小泡泡
+$bubble-size-sm: 112rpx;  // 小泡泡
+$bubble-size-md: 144rpx;  // 中泡泡  
+$bubble-size-lg: 176rpx;  // 大泡泡
+$bubble-size-xl: 208rpx;  // 超大泡泡
+
+// 圆角系统
+$radius-xs: 12rpx;
+$radius-sm: 16rpx;
+$radius-md: 20rpx;
+$radius-lg: 24rpx;
+$radius-xl: 32rpx;
+$radius-2xl: 48rpx;
+$radius-3xl: 64rpx;
+$radius-full: 50%;
+
+/* ========== 特殊效果颜色 ========== */
+// 金色发光效果
+$golden-glow: 0 0 60rpx rgba(255, 215, 0, 0.7);
+$golden-glow-soft: 0 0 40rpx rgba(255, 215, 0, 0.5);
+
+// 彩虹发光效果
+$rainbow-glow: 0 0 50rpx rgba(255, 255, 255, 0.6);
+
+// 粒子颜色系统
+$particle-colors: #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FECA57, #FF9FF3, #54A0FF, #FFD93D;
+
+/* 🎨 现代化UI组件系统 */
+
+/* 玻璃拟态效果 - 升级版 */
+@mixin modern-glass {
+  background: $glass-bg;
+  backdrop-filter: blur($glass-blur);
+  border: 1rpx solid $glass-border;
+  box-shadow: $glass-shadow;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* #ifndef MP */
+  backdrop-filter: blur($glass-blur);
+  /* #endif */
+  
+  /* #ifdef MP */
+  background: $glass-bg-dark;
+  /* #endif */
+}
+
+/* 升级版玻璃拟态 - 用于重要元素 */
+@mixin premium-glass {
+  background: $glass-bg;
+  backdrop-filter: blur($glass-blur-strong);
+  border: 2rpx solid $glass-border;
+  box-shadow: $glass-shadow-strong;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* #ifndef MP */
+  backdrop-filter: blur($glass-blur-strong);
+  /* #endif */
+  
+  /* #ifdef MP */
+  background: rgba(255, 255, 255, 0.95);
+  border: 2rpx solid rgba(255, 255, 255, 0.8);
+  /* #endif */
+}
+
+/* 现代按钮样式 - 柔和治愈系 */
+@mixin modern-btn-primary {
+  background: $primary-gradient;
+  border: 2rpx solid rgba(255, 255, 255, 0.8);
+  color: #374151;
+  font-weight: 600;
+  border-radius: $radius-2xl;
+  padding: 24rpx 48rpx;
+  font-size: 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:active {
+    transform: translateY(2rpx);
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+    background: $primary-gradient-soft;
+  }
+  
+  &:hover:before {
+    left: 100%;
+  }
+}
+
+/* 柔和按钮样式 */
+@mixin soft-btn {
+  background: $glass-bg;
+  backdrop-filter: blur($glass-blur);
+  border: 2rpx solid $glass-border;
+  color: #333;
+  font-weight: 500;
+  border-radius: $radius-xl;
+  padding: 20rpx 40rpx;
+  font-size: 26rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 38, 135, 0.2);
+  transition: all 0.3s ease;
+  
+  &:active {
+    transform: translateY(1rpx);
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* 卡片样式 */
+@mixin modern-card {
+  @include modern-glass;
+  border-radius: $radius-2xl;
+  padding: 32rpx;
+  
+  &:hover {
+    transform: translateY(-4rpx);
+    box-shadow: 0 32rpx 120rpx rgba(31, 38, 135, 0.4);
+  }
+}
+
+/* 浮动元素样式 */
+@mixin floating-element {
+  animation: float 3s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0rpx); }
+  50% { transform: translateY(-20rpx); }
+}
+
+/* 呼吸动画 */
+@mixin breathing-animation {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* 脉冲动画 */
+@mixin pulse-animation {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* 弹性进入动画 */
+@mixin bounce-in {
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+  70% { transform: scale(0.9) rotate(-3deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* 闪烁动画 */
+@mixin shimmer-animation {
+  position: relative;
+  overflow: hidden;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* 3D效果按钮 */
+@mixin btn-3d {
+  background: linear-gradient(145deg, #667eea, #764ba2);
+  border-radius: $radius-xl;
+  padding: 24rpx 48rpx;
+  color: white;
+  font-weight: 600;
+  font-size: 28rpx;
+  box-shadow: 
+    0 8rpx 0 #5a67d8,
+    0 12rpx 24rpx rgba(102, 126, 234, 0.4);
+  transform: translateY(0);
+  transition: all 0.1s ease;
+  
+  &:active {
+    transform: translateY(6rpx);
+    box-shadow: 
+      0 2rpx 0 #5a67d8,
+      0 8rpx 16rpx rgba(102, 126, 234, 0.3);
+  }
+}
+
+/* 渐变文字效果 */
+@mixin gradient-text {
+  background: $primary-gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+/* 发光边框 */
+@mixin glowing-border {
+  position: relative;
+  background: $glass-bg;
+  border-radius: $radius-xl;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    inset: -2rpx;
+    padding: 2rpx;
+    background: $primary-gradient;
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+  }
+}
+
+/* 霓虹效果 */
+@mixin rainbow-border {
+  position: relative;
+  border-radius: $radius-xl;
+  background: $glass-bg;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    inset: -2rpx;
+    padding: 2rpx;
+    background: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff, #ff6b6b);
+    border-radius: inherit;
+    animation: rainbow 3s linear infinite;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+  }
+}
+
+@keyframes rainbow {
+  to { transform: rotate(360deg); }
+}
+
+/* 兼容性：保留原有的基础mixin */
+@mixin bubble-glass {
+  @include modern-glass;
+}
+
+@mixin bubble-btn-primary {
+  @include modern-btn-primary;
+}
+
+/* 泡泡动画系统 */
+@mixin bubble-float-animations {
+  /* 泡泡浮动动画 - 每个泡泡有不同的节奏 */
+  .bubble-float-1 { animation: bubbleFloat1 3.5s ease-in-out infinite; }
+  .bubble-float-2 { animation: bubbleFloat2 4.2s ease-in-out infinite; }
+  .bubble-float-3 { animation: bubbleFloat3 3.8s ease-in-out infinite; }
+  .bubble-float-4 { animation: bubbleFloat4 4.5s ease-in-out infinite; }
+  .bubble-float-5 { animation: bubbleFloat5 3.9s ease-in-out infinite; }
+  .bubble-float-6 { animation: bubbleFloat6 4.0s ease-in-out infinite; }
+  .bubble-float-7 { animation: bubbleFloat7 3.6s ease-in-out infinite; }
+  .bubble-float-8 { animation: bubbleFloat8 4.3s ease-in-out infinite; }
+
+  @keyframes bubbleFloat1 {
+    0%, 100% { transform: translateY(0rpx) translateX(0rpx) scale(1); }
+    25% { transform: translateY(-24rpx) translateX(4rpx) scale(1.02); }
+    50% { transform: translateY(-12rpx) translateX(-2rpx) scale(0.98); }
+    75% { transform: translateY(-30rpx) translateX(6rpx) scale(1.01); }
+  }
+
+  @keyframes bubbleFloat2 {
+    0%, 100% { transform: translateY(0rpx) translateX(0rpx) scale(1); }
+    33% { transform: translateY(-16rpx) translateX(-6rpx) scale(1.03); }
+    66% { transform: translateY(-20rpx) translateX(4rpx) scale(0.97); }
+  }
+
+  @keyframes bubbleFloat3 {
+    0%, 100% { transform: translateY(0rpx) translateX(0rpx) scale(1); }
+    20% { transform: translateY(-28rpx) translateX(2rpx) scale(1.01); }
+    60% { transform: translateY(-14rpx) translateX(-4rpx) scale(1.02); }
+    80% { transform: translateY(-22rpx) translateX(6rpx) scale(0.99); }
+  }
+
+  @keyframes bubbleFloat4 {
+    0%, 100% { transform: translateY(0rpx) translateX(0rpx) scale(1); }
+    25% { transform: translateY(-12rpx) translateX(-4rpx) scale(1.04); }
+    75% { transform: translateY(-26rpx) translateX(2rpx) scale(0.96); }
+  }
+
+  @keyframes bubbleFloat5 {
+    0%, 100% { transform: translateY(0rpx) translateX(0rpx) scale(1); }
+    30% { transform: translateY(-18rpx) translateX(4rpx) scale(1.02); }
+    70% { transform: translateY(-24rpx) translateX(-2rpx) scale(0.98); }
+  }
+
+  @keyframes bubbleFloat6 {
+    0%, 100% { transform: translateY(0rpx) translateX(0rpx) scale(1); }
+    20% { transform: translateY(-20rpx) translateX(6rpx) scale(1.01); }
+    40% { transform: translateY(-10rpx) translateX(-2rpx) scale(1.03); }
+    80% { transform: translateY(-16rpx) translateX(4rpx) scale(0.99); }
+  }
+
+  @keyframes bubbleFloat7 {
+    0%, 100% { transform: translateY(0rpx) translateX(0rpx) scale(1); }
+    25% { transform: translateY(-22rpx) translateX(-4rpx) scale(0.98); }
+    50% { transform: translateY(-14rpx) translateX(2rpx) scale(1.02); }
+    75% { transform: translateY(-28rpx) translateX(-6rpx) scale(1.01); }
+  }
+
+  @keyframes bubbleFloat8 {
+    0%, 100% { transform: translateY(0rpx) translateX(0rpx) scale(1); }
+    35% { transform: translateY(-26rpx) translateX(4rpx) scale(1.02); }
+    65% { transform: translateY(-16rpx) translateX(-4rpx) scale(0.97); }
+  }
+}
+
+/* 戳击动画系统 */
+@mixin bubble-pop-animations {
+  .bubble-pop {
+    animation: bubblePop 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .bubble-success {
+    animation: bubbleSuccess 1s ease-out;
+  }
+
+  @keyframes bubblePop {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    15% { transform: scale(1.5) rotate(8deg); opacity: 0.9; }
+    30% { transform: scale(1.2) rotate(-5deg); opacity: 0.8; }
+    50% { transform: scale(0.8) rotate(12deg); opacity: 0.6; }
+    70% { transform: scale(0.4) rotate(-15deg); opacity: 0.3; }
+    100% { transform: scale(0) rotate(0deg); opacity: 0; }
+  }
+
+  @keyframes bubbleSuccess {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.2) rotate(5deg); }
+    60% { transform: scale(1.1) rotate(-3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+}
+
+/* 粒子动画系统 */
+@mixin particle-animations {
+  .particle-1 { animation: particleFloat1 2s ease-out forwards; }
+  .particle-2 { animation: particleFloat2 2.5s ease-out forwards; }
+  .particle-3 { animation: particleFloat3 1.8s ease-out forwards; }
+  .particle-4 { animation: particleFloat4 2.2s ease-out forwards; }
+  .particle-5 { animation: particleFloat5 1.9s ease-out forwards; }
+
+  @keyframes particleFloat1 {
+    0% { transform: translate(0, 0) scale(1.5); opacity: 1; }
+    50% { transform: translate(40rpx, -50rpx) scale(1.8); opacity: 0.8; }
+    100% { transform: translate(100rpx, -120rpx) scale(0.5); opacity: 0; }
+  }
+
+  @keyframes particleFloat2 {
+    0% { transform: translate(0, 0) scale(1.2); opacity: 1; }
+    50% { transform: translate(-40rpx, -60rpx) scale(1.6); opacity: 0.7; }
+    100% { transform: translate(-80rpx, -100rpx) scale(0.3); opacity: 0; }
+  }
+
+  @keyframes particleFloat3 {
+    0% { transform: translate(0, 0) scale(1.4); opacity: 1; }
+    50% { transform: translate(50rpx, -40rpx) scale(1.7); opacity: 0.9; }
+    100% { transform: translate(90rpx, -80rpx) scale(0.4); opacity: 0; }
+  }
+
+  @keyframes particleFloat4 {
+    0% { transform: translate(0, 0) scale(1.3); opacity: 1; }
+    50% { transform: translate(-50rpx, -30rpx) scale(1.5); opacity: 0.8; }
+    100% { transform: translate(-100rpx, -60rpx) scale(0.2); opacity: 0; }
+  }
+
+  @keyframes particleFloat5 {
+    0% { transform: translate(0, 0) scale(1.6); opacity: 1; }
+    50% { transform: translate(20rpx, -70rpx) scale(1.9); opacity: 0.7; }
+    100% { transform: translate(50rpx, -130rpx) scale(0.6); opacity: 0; }
+  }
+}
+
+/* 特殊效果动画 */
+@mixin special-effects {
+  /* 写一句泡泡闪光效果 */
+  .write-shine {
+    animation: writeShine 3s ease-in-out infinite;
+  }
+
+  @keyframes writeShine {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  /* 金色泡泡发光效果 */
+  .golden-glow {
+    animation: goldenGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes goldenGlow {
+    0%, 100% { 
+      box-shadow: 0 0 40rpx rgba(255, 215, 0, 0.6);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 80rpx rgba(255, 215, 0, 0.9);
+      transform: scale(1.05);
+    }
+  }
+
+  /* 奖励飘出动画 */
+  .reward-bounce {
+    animation: bounceUp 2s ease-out forwards;
+  }
+
+  .reward-bounce-delayed {
+    animation: bounceUpDelayed 2.5s ease-out forwards;
+  }
+
+  @keyframes bounceUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    20% { transform: translateY(-60rpx) scale(1.1); opacity: 1; }
+    40% { transform: translateY(-100rpx) scale(1.2); opacity: 1; }
+    100% { transform: translateY(-240rpx) scale(0.8); opacity: 0; }
+  }
+
+  @keyframes bounceUpDelayed {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    30% { transform: translateY(-40rpx) scale(1.1); opacity: 1; }
+    50% { transform: translateY(-80rpx) scale(1.2); opacity: 1; }
+    100% { transform: translateY(-300rpx) scale(0.8); opacity: 0; }
+  }
+}

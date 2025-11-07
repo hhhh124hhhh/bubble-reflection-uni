@@ -1,0 +1,78 @@
+name: PR 自动化
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: 设置 Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+        
+    - name: 安装依赖
+      run: npm ci
+      
+    - name: 类型检查
+      run: npm run type-check
+      
+    - name: 构建测试
+      run: |
+        npm run build:h5
+        npm run build:mp-weixin
+        
+    - name: PR 信息检查
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const pr = context.payload.pull_request;
+          const body = pr.body || '';
+          
+          // 检查 PR 描述是否包含必要信息
+          if (body.length < 50) {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              body: '⚠️ 请提供更详细的 PR 描述，包括：\n- 📝 变更内容说明\n- 🐛 修复的问题或新增的功能\n- 🧪 测试情况\n- 📸 相关截图（如适用）'
+            });
+          }
+          
+    - name: 更新 PR 标签
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const pr = context.payload.pull_request;
+          const labels = [];
+          
+          // 根据文件变更自动添加标签
+          if (pr.changed_files && pr.changed_files.some(file => file.filename.includes('src/'))) {
+            labels.push('代码变更');
+          }
+          
+          if (pr.changed_files && pr.changed_files.some(file => file.filename.includes('docs/'))) {
+            labels.push('文档更新');
+          }
+          
+          if (pr.changed_files && pr.changed_files.some(file => file.filename.includes('cloudfunctions/'))) {
+            labels.push('云函数');
+          }
+          
+          if (labels.length > 0) {
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              labels: labels
+            });
+          }

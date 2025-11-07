@@ -1,0 +1,62 @@
+name: 问题模板
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  auto-label:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues'
+    
+    steps:
+    - name: 自动标签
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const issue = context.payload.issue;
+          const labels = [];
+          
+          // 根据问题标题和内容自动添加标签
+          if (issue.title.includes('bug') || issue.body.includes('错误') || issue.body.includes('问题')) {
+            labels.push('bug');
+          }
+          
+          if (issue.title.includes('feature') || issue.title.includes('功能') || issue.body.includes('建议')) {
+            labels.push('enhancement');
+          }
+          
+          if (issue.title.includes('文档') || issue.body.includes('document') || issue.body.includes('说明')) {
+            labels.push('documentation');
+          }
+          
+          if (labels.length > 0) {
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: labels
+            });
+          }
+          
+    - name: 添加欢迎评论
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const issue = context.payload.issue;
+          
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: issue.number,
+            body: `👋 感谢您提交问题！我们团队会尽快查看并回复。
+
+请确保您提供了足够的信息来帮助我们理解和解决问题：
+
+- 📝 **问题描述**: 清晰描述您遇到的问题
+- 🔧 **复现步骤**: 如何重现这个问题
+- 💻 **环境信息**: 您使用的平台、版本等
+- 📸 **截图/录屏**: 如果可能，请提供视觉证据
+
+再次感谢您的反馈！🫧✨`
+          });
